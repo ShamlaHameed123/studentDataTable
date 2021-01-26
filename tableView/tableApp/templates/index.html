@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="//cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css">
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.css">
 
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.js"></script>
+
 
 </head>
 
@@ -36,60 +36,11 @@
   </div>
   <script src="//code.jquery.com/jquery-1.12.4.js"></script>
   <script src="//cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.js"></script>
   <script>
 
-	  var editor;
 
-$(document).ready(function() {
-    editor = new $.fn.dataTable.Editor( {
-        ajax: {
-            create: {
-                type: 'POST',
-                url:  'http://127.0.0.1:8000/student/api/create?format=datatables'
-            },
-            edit: {
-                type: 'PUT',
-                url:  'http://127.0.0.1:8000/student/api/?pk=_pk_&&format=datatables'
-            },
-            remove: {
-                type: 'DELETE',
-                url:  'http://127.0.0.1:8000/student/api/?pk=_pk_/delete?format=datatables'
-            }
-        },
-        table: "#student",
-        fields: [ {
-                label: "First name",
-                name: "first_name"
-            }, {
-                label: "Last name",
-                name: "last_name"
-            }, {
-                label: "Date of Birth",
-                name: "Date_of_birth"
-            }, {
-                label: "Email:",
-                name: "Email"
-            }, {
-                label: "Class:",
-                name: "Class_level"
-            }, {
-                label: "Parent name:",
-                name: "Parent_name"
-            }, {
-                label: "Phone number:",
-                name: "Phone_number"
-            },
-			{
-                label: "Date added:",
-                name: "DateAdded"
-            },
-			{
-                label: "Date updated:",
-                name: "DateUpdated"
-            },
-        ]
-    } );
-
+var editor;
 $(document).ready(function() {
 	$('#student').DataTable({
 			"serverSide": true,
@@ -117,6 +68,54 @@ $(document).ready(function() {
             { extend: "remove", editor: editor }
         ]
     } );
+	editor = new $.fn.dataTable.Editor( {
+		ajax: {
+			create: {
+				type: 'POST',
+				url:  'http://127.0.0.1:8000/student/api/create?format=datatables'
+			},
+			edit: {
+				type: 'PUT',
+				url:  'http://127.0.0.1:8000/student/api/?pk=_pk_&&format=datatables'
+			},
+			remove: {
+				type: 'DELETE',
+				url:  'http://127.0.0.1:8000/student/api/?pk=_pk_/delete?format=datatables'
+			}
+		},
+		table: "#student",
+		fields: [ {
+				label: "First name",
+				name: "first_name"
+			}, {
+				label: "Last name",
+				name: "last_name"
+			}, {
+				label: "Date of Birth",
+				name: "Date_of_birth"
+			}, {
+				label: "Email:",
+				name: "Email"
+			}, {
+				label: "Class:",
+				name: "Class_level"
+			}, {
+				label: "Parent name:",
+				name: "Parent_name"
+			}, {
+				label: "Phone number:",
+				name: "Phone_number"
+			},
+			{
+				label: "Date added:",
+				name: "DateAdded"
+			},
+			{
+				label: "Date updated:",
+				name: "DateUpdated"
+			},
+		]
+	} );
 } );
   </script>
 </body>
