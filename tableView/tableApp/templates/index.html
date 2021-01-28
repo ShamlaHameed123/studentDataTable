@@ -35,19 +35,23 @@
     </div>
   </div>
   <script src="//code.jquery.com/jquery-1.12.4.js"></script>
-  <script src="//cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
   <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.js"></script>
+  <script src="//cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
   <script>
 
 
-var editor;
+
 $(document).ready(function() {
 	$('#student').DataTable({
 			"serverSide": true,
 			"pageLength":25,
-			"ajax": "http://127.0.0.1:8000/student/api/?format=datatables",
+            "dataSrc":"",
+			"ajax": {
+				"url": "http://localhost:8000/student/api/list",
+
+			},
 			"columns": [
-				{"data": "Id", "searchable": false},
+
 				{"data": "First_name"},
 				{"data": "Last_name"},
 				{"data": "Date_of_birth"},
@@ -61,60 +65,6 @@ $(document).ready(function() {
 				{"data": "Year_joined"},
 
 			],
-        select: true,
-        buttons: [
-            { extend: "create", editor: editor },
-            { extend: "edit",   editor: editor },
-            { extend: "remove", editor: editor }
-        ]
-    } );
-	editor = new $.fn.dataTable.Editor( {
-		ajax: {
-			create: {
-				type: 'POST',
-				url:  'http://127.0.0.1:8000/student/api/create?format=datatables'
-			},
-			edit: {
-				type: 'PUT',
-				url:  'http://127.0.0.1:8000/student/api/?pk=_pk_&&format=datatables'
-			},
-			remove: {
-				type: 'DELETE',
-				url:  'http://127.0.0.1:8000/student/api/?pk=_pk_/delete?format=datatables'
-			}
-		},
-		table: "#student",
-		fields: [ {
-				label: "First name",
-				name: "first_name"
-			}, {
-				label: "Last name",
-				name: "last_name"
-			}, {
-				label: "Date of Birth",
-				name: "Date_of_birth"
-			}, {
-				label: "Email:",
-				name: "Email"
-			}, {
-				label: "Class:",
-				name: "Class_level"
-			}, {
-				label: "Parent name:",
-				name: "Parent_name"
-			}, {
-				label: "Phone number:",
-				name: "Phone_number"
-			},
-			{
-				label: "Date added:",
-				name: "DateAdded"
-			},
-			{
-				label: "Date updated:",
-				name: "DateUpdated"
-			},
-		]
 	} );
 } );
   </script>
