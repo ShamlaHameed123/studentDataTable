@@ -23,11 +23,13 @@
               <th>Date of Birth</th>
               <th>Email</th>
 			  <th>Class</th>
-              <th>Phone number</th>
+
 			  <th>Parent name</th>
+			  <th>Phone number</th>
 			  <th>Date Added</th>
 			  <th>Date Updated</th>
 			  <th>Year joined</th>
+			  <th>Action</th>
             </tr>
           </thead>
         </table>
@@ -42,6 +44,7 @@
 
 
 $(document).ready(function() {
+		var id = "data.Id";
 	$('#student').DataTable({
 			"serverSide": true,
 			"pageLength":25,
@@ -63,10 +66,19 @@ $(document).ready(function() {
 				{"data": "DateAdded"},
 				{"data": "DateUpdated"},
 				{"data": "Year_joined"},
-
-			],
-	} );
+				{
+            "data": null,
+            "className": "center",
+			"render": function (data, type, row) {
+				console.log(row.Id);
+                 return '<a href="http://localhost:8000/student/api/'+row.Id+'" class="editor_edit">Edit</a> / <a href="http://localhost:8000/student/api/'+row.Id+'/delete" class="editor_remove">Delete</a>'
+		     }
+        }
+	],
 } );
+} );
+
   </script>
+  <a type="button" class="btn btn-success" href="http://localhost:8000/student/api/create">Add student</a>
 </body>
 </html>
